@@ -1,0 +1,1 @@
+# Technical_Test_Java_Kafka_Angular
