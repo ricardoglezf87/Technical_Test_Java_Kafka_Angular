@@ -12,6 +12,7 @@ import com.technicaltest.orderservice.repository.OrderRepository;
 
 @RequestMapping("/api/orders")
 @RestController 
+@CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
     private final OrderProducer orderProducer;
     private final OrderRepository orderRepository;
