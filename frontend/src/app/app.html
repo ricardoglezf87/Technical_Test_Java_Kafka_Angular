@@ -1,0 +1,12 @@
+<h1>Order Management</h1>
+
+<app-order-form (orderCreated)="onOrderCreated($event)">
+
+</app-order-form>
+
+<p>Total pedidos: {{ orders().length }}</p>
+
+<app-order-list
+  [orders]="orders()">
+</app-order-list>
+
