@@ -1,0 +1,20 @@
+2026-10-03 01:24:32.330558+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; se esperaba "identifier"
+Syntax error in SQL statement "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id)) [42001-240]
+2026-10-03 01:25:18.333798+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; se esperaba "identifier"
+Syntax error in SQL statement "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id)) [42001-240]
+2026-10-03 01:25:27.705719+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "select o1_0.id,o1_0.customer,o1_0.price,o1_0.product,o1_0.quantity,o1_0.status from [*]order o1_0 where o1_0.id=?"; se esperaba "identifier"
+Syntax error in SQL statement "select o1_0.id,o1_0.customer,o1_0.price,o1_0.product,o1_0.quantity,o1_0.status from [*]order o1_0 where o1_0.id=?"; expected "identifier"; SQL statement:
+select o1_0.id,o1_0.customer,o1_0.price,o1_0.product,o1_0.quantity,o1_0.status from order o1_0 where o1_0.id=? [42001-240]
+2026-10-03 01:26:31.924878+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; se esperaba "identifier"
+Syntax error in SQL statement "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id)) [42001-240]
+2026-10-03 01:26:34.142021+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; se esperaba "identifier"
+Syntax error in SQL statement "create table [*]order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table order (id uuid not null, customer varchar(255), price numeric(38,2), product varchar(255), quantity integer, status varchar(255), primary key (id)) [42001-240]
