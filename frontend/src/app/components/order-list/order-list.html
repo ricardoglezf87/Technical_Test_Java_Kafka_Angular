@@ -1,27 +1,41 @@
+<div class="list-header">
+  <h2>Pedidos</h2>
+  <span>{{ orders().length }} pedidos</span>
+</div>
+
 @if (orders().length === 0) {
   <p>No hay pedidos.</p>
 } @else {
-  <table>
-    <thead>
-      <tr>
-        <th>Cliente</th>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      @for (order of orders(); track order.id) {
+  <div class="table-wrapper">
+    <table>
+      <thead>
         <tr>
-          <td>{{ order.customer }}</td>
-          <td>{{ order.product }}</td>
-          <td>{{ order.quantity }}</td>
-          <td>{{ order.price }} €</td>
-          <td>{{ order.status }}</td>
+          <th>Cliente</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Estado</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        @for (order of orders(); track order.id) {
+          <tr>
+            <td>{{ order.customer }}</td>
+            <td>{{ order.product }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }} €</td>
+            <td>
+              <span
+                class="status"
+                [class.created]="order.status === 'CREATED'"
+                [class.completed]="order.status === 'COMPLETED'">
+                {{ order.status }}
+              </span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 }
