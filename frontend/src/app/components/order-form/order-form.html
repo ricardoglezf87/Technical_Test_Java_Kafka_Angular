@@ -1,0 +1,52 @@
+<h2>Nuevo pedido</h2>
+
+<form (ngSubmit)="submit()">
+
+  <div>
+    <label>Cliente</label>
+    <input
+      type="text"
+      name="customer"
+      [(ngModel)]="order.customer"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Producto</label>
+    <input
+      type="text"
+      name="product"
+      [(ngModel)]="order.product"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Cantidad</label>
+    <input
+      type="number"
+      name="quantity"
+      [(ngModel)]="order.quantity"
+      min="1"
+      required
+    />
+  </div>
+
+  <div>
+    <label>Precio</label>
+    <input
+      type="number"
+      name="price"
+      [(ngModel)]="order.price"
+      min="0"
+      step="0.01"
+      required
+    />
+  </div>
+
+  <button type="submit">
+    Crear pedido
+  </button>
+
+</form>

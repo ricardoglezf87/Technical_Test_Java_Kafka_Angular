@@ -1,0 +1,27 @@
+@if (orders().length === 0) {
+  <p>No hay pedidos.</p>
+} @else {
+  <table>
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (order of orders(); track order.id) {
+        <tr>
+          <td>{{ order.customer }}</td>
+          <td>{{ order.product }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.price }} €</td>
+          <td>{{ order.status }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

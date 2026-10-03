@@ -1,12 +1,12 @@
 <h1>Order Management</h1>
-<h2>Orders</h2>
 
-<ul>
-  <li *ngFor="let order of orders">
-    {{ order.id }} |
-    {{ order.customer }} |
-    {{ order.product }} |
-    {{ order.quantity }} € |
-    {{ order.status }}
-  </li>
-</ul>
+<app-order-form (orderCreated)="onOrderCreated($event)">
+
+</app-order-form>
+
+<p>Total pedidos: {{ orders().length }}</p>
+
+<app-order-list
+  [orders]="orders()">
+</app-order-list>
+
