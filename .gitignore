@@ -20,3 +20,5 @@
 
 # Miscellaneous
 order-service/data/
+order-data-service/data/
+.vscode/
