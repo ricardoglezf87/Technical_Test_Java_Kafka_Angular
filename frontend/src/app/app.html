@@ -1,12 +1,22 @@
-<h1>Order Management</h1>
+<div class="page">
+  <header class="header">
+    <div>
+      <h1>Order Management</h1>
+      <p>Gestión de pedidos con Spring Boot, Kafka y Angular</p>
+    </div>
+  </header>
 
-<app-order-form (orderCreated)="onOrderCreated($event)">
+  <main class="content">
+    <section class="card">
+      <app-order-form
+        (orderCreated)="onOrderCreated($event)">
+      </app-order-form>
+    </section>
 
-</app-order-form>
-
-<p>Total pedidos: {{ orders().length }}</p>
-
-<app-order-list
-  [orders]="orders()">
-</app-order-list>
-
+    <section class="card">
+      <app-order-list
+        [orders]="orders()">
+      </app-order-list>
+    </section>
+  </main>
+</div> 
