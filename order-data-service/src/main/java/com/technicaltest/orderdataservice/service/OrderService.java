@@ -1,5 +1,6 @@
 package com.technicaltest.orderdataservice.service;
 
+import com.technicaltest.orderdataservice.exception.OrderNotFoundException;
 import com.technicaltest.orderdataservice.model.Order;
 import com.technicaltest.orderdataservice.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -28,30 +29,12 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
-    public void deleteById(UUID id) {
-        orderRepository.deleteById(id);
-    }
-
-    public Order update(UUID id, Order updatedOrder) {
-        return orderRepository.findById(id)
-                .map(order -> {
-                    order.setCustomer(updatedOrder.getCustomer());
-                    order.setProduct(updatedOrder.getProduct());
-                    order.setQuantity(updatedOrder.getQuantity());
-                    order.setPrice(updatedOrder.getPrice());
-                    order.setStatus(updatedOrder.getStatus());
-
-                    return orderRepository.save(order);
-                })
-                .orElseThrow(() -> new RuntimeException("Order not found with id " + id));
-    }
-
     public Order updateStatus(UUID id, String status) {
         return orderRepository.findById(id)
                 .map(order -> {
                     order.setStatus(status);
                     return orderRepository.save(order);
                 })
-                .orElseThrow(() -> new RuntimeException("Order not found with id " + id));
+                .orElseThrow(() -> new OrderNotFoundException(id));
     }
 }

@@ -25,5 +25,23 @@ public class GlobalExceptionHandler {
         response.put("errors", errors);
 
         return ResponseEntity.badRequest().body(response);
+    }    
+
+    @ExceptionHandler (OrderNotFoundException.class)
+    public ResponseEntity<Map<String,Object>> handleOrderNotFoundException(OrderNotFoundException ex) {
+        Map<String,Object> response = new HashMap<>();
+        response.put("status", HttpStatus.NOT_FOUND.value());
+        response.put("error", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }
+
+    @ExceptionHandler (OrderDataServiceException.class)
+    public ResponseEntity<Map<String,Object>> handleOrderDataServiceException(OrderDataServiceException ex) {
+        Map<String,Object> response = new HashMap<>();
+        response.put("status", HttpStatus.SERVICE_UNAVAILABLE.value());
+        response.put("error", ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(response);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import com.technicaltest.orderservice.exception.OrderDataServiceException;
 import com.technicaltest.orderservice.model.Order;
 
 @Component 
@@ -17,35 +18,55 @@ public class OrderDataClient {
     }
 
     public Order save(Order order) {
-        return restClient.post()
-        .body(order)
-        .retrieve()
-        .body(Order.class);
+        try{
+            return restClient.post()
+            .body(order)
+            .retrieve()
+            .body(Order.class);
+        }
+        catch (Exception e) {
+            throw new OrderDataServiceException("Error guardando el pedido", e);
+        }
     }
 
     public List<Order> getAll() {
-        Order[] orders = restClient.get()
-            .retrieve()
-            .body(Order[].class);
+        try{
+            Order[] orders = restClient.get()
+                .retrieve()
+                .body(Order[].class);
 
-        return orders == null ? List.of() : Arrays.asList(orders);
+            return orders == null ? List.of() : Arrays.asList(orders);
+        }
+        catch (Exception e) {
+                throw new OrderDataServiceException("Error obteniendo los pedidos", e);
+        }
     }
 
     public Order getById(String id) {
-        return restClient.get()
+        try{
+            return restClient.get()
             .uri("/{id}", id)
             .retrieve()
             .body(Order.class);
+        }
+        catch (Exception e) {
+                throw new OrderDataServiceException("Error obteniendo el pedido con id: " + id, e);
+        }
     }
 
     public Order updateStatus(String id, String status) {
-        return restClient.patch()
+        try{
+            return restClient.patch()
             .uri(uriBuilder -> uriBuilder
             .path("/{id}/status")
             .queryParam("status", status)
             .build(id))
             .retrieve()
             .body(Order.class);
+        }
+        catch (Exception e) {
+                throw new OrderDataServiceException("Error actualizando el estado del pedido", e);
+        }
     }
 
 }

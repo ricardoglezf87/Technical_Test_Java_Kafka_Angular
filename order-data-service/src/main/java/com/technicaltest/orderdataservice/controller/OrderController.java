@@ -40,16 +40,6 @@ public class OrderController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Order> update(@PathVariable UUID id, @RequestBody Order updatedOrder) {
-        try {
-            Order order = orderService.update(id, updatedOrder);
-            return new ResponseEntity<>(order, HttpStatus.OK);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PatchMapping("/{id}/status")
     public ResponseEntity<Order> updateStatus(@PathVariable UUID id, @RequestParam String status) {
         try {
@@ -60,13 +50,4 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
-        try {
-            orderService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 }
