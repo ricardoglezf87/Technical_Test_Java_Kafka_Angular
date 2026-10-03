@@ -1,7 +1,6 @@
 package com.technicaltest.orderprocessor.kafka;
 
 import com.technicaltest.orderprocessor.model.Order;
-import com.technicaltest.orderprocessor.kafka.OrderProcessedProducer;
 
 import org.springframework.stereotype.Service;
 import org.springframework.kafka.annotation.KafkaListener;

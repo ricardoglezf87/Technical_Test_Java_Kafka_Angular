@@ -1,12 +1,16 @@
 package com.technicaltest.orderservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@Setter
+@Getter
+@NoArgsConstructor 
+@AllArgsConstructor 
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -14,69 +18,18 @@ public class Order {
     @Id
     private UUID id;
 
+    @NotBlank(message = "El cliente es obligatorio")
     private String customer;
+
+    @NotBlank(message = "El producto es obligatorio")
     private String product;
+
+    @Min(value = 1, message = "La cantidad debe ser al menos 1")
     private Integer quantity;
+
+    @DecimalMin(value = "0.01", message = "El precio debe ser mayor que 0.01")
     private BigDecimal price;
+    
     private String status;
-
-    public Order() {
-    }   
-
-    public Order(UUID id, String customer, String product, Integer quantity, BigDecimal price, String status) {
-        this.id = id;
-        this.customer = customer;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-        this.status = status;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+   
 }

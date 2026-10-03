@@ -10,6 +10,8 @@ import com.technicaltest.orderservice.kafka.OrderProducer;
 import com.technicaltest.orderservice.model.Order;
 import com.technicaltest.orderservice.repository.OrderRepository;
 
+import jakarta.validation.Valid;
+
 @RequestMapping("/api/orders")
 @RestController 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,7 +26,7 @@ public class OrderController {
 
     @PostMapping 
     @ResponseStatus (HttpStatus.CREATED)
-    public Order createOrder(@RequestBody Order order) {
+    public Order createOrder(@Valid  @RequestBody Order order) {
         order.setId(UUID.randomUUID());
         order.setStatus("CREATED");
         orderRepository.save(order);
