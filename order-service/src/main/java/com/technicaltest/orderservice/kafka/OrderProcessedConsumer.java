@@ -4,22 +4,18 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.technicaltest.orderservice.model.Order;
-import com.technicaltest.orderservice.repository.OrderRepository;
+import com.technicaltest.orderservice.service.OrderService;
 
 @Service 
 public class OrderProcessedConsumer {
-    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
-    public OrderProcessedConsumer(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
+    public OrderProcessedConsumer(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @KafkaListener (topics = "order-processed", groupId = "order-service-group")
     public void consumeProcessedOrder(Order processedOrder) {
-        orderRepository.findById(processedOrder.getId())
-            .ifPresent(order -> {
-            order.setStatus(processedOrder.getStatus());
-            orderRepository.save(order);
-        });
+        orderService.updateStatus(processedOrder.getId(), processedOrder.getStatus());
     }
 }

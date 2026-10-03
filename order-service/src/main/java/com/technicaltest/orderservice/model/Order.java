@@ -1,6 +1,5 @@
 package com.technicaltest.orderservice.model;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -11,11 +10,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor 
 @AllArgsConstructor 
-@Entity
-@Table(name = "orders")
 public class Order {
    
-    @Id
     private UUID id;
 
     @NotBlank(message = "El cliente es obligatorio")
