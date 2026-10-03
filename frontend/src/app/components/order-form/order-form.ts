@@ -18,7 +18,7 @@ export class OrderForm {
     customer: new FormControl('', [Validators.required, Validators.minLength(2)]),
     product: new FormControl('', [Validators.required, Validators.minLength(2)]),
     quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
-    price: new FormControl(0, [Validators.required, Validators.min(0)]),
+    price: new FormControl(0, [Validators.required, Validators.min(0.01)]),
   })
 
   constructor(private orderService: OrderService) {}
