@@ -1,13 +1,13 @@
-package com.technicaltest.order_service;
+package com.technicaltest.orderprocessor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OrderServiceApplication {
+public class OrderProcessorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderServiceApplication.class, args);
+		SpringApplication.run(OrderProcessorApplication.class, args);
 	}
 
 }
