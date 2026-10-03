@@ -8,12 +8,10 @@ import com.technicaltest.orderservice.repository.OrderRepository;
 
 @Service 
 public class OrderProcessedConsumer {
-    private final OrderProducer orderProducer;
     private final OrderRepository orderRepository;
 
-    public OrderProcessedConsumer(OrderRepository orderRepository, OrderProducer orderProducer) {
+    public OrderProcessedConsumer(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.orderProducer = orderProducer;
     }
 
     @KafkaListener (topics = "order-processed", groupId = "order-service-group")
