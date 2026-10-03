@@ -3,6 +3,7 @@ package com.technicaltest.orderservice.client;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -11,10 +12,12 @@ import com.technicaltest.orderservice.model.Order;
 
 @Component 
 public class OrderDataClient {
+
     private final RestClient restClient;
 
-    public OrderDataClient() {
-        this.restClient = RestClient.builder().baseUrl("http://localhost:8081/data/orders").build();
+    public OrderDataClient( @Value("${order-data-service.url}") String baseUrl) {
+        System.out.println("baseUrl = " + baseUrl);
+        this.restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
 
     public Order save(Order order) {
