@@ -1,0 +1,23 @@
+<div class="page">
+  <header class="header">
+    <div>
+      <h1>Order Management</h1>
+      <p>Gestión de pedidos con Spring Boot, Kafka y Angular</p>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="card">
+      <app-order-form
+        (orderCreated)="onOrderCreated($event)">
+      </app-order-form>
+    </section>
+
+    <section class="card">
+      <app-order-list
+        [orders]="orders()" 
+        (retry)="onRetry($event)">
+      </app-order-list>
+    </section>
+  </main>
+</div> 
