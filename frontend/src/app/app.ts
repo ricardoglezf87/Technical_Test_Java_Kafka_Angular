@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, NgZone, signal } from '@angular/core';
 import { Order } from './models/order';
 import { OrderService } from './services/order.service';
 import { CommonModule } from '@angular/common';
@@ -15,10 +15,46 @@ export class App implements OnInit {
   
   orders = signal<Order[]>([]);
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {   
     this.loadOrders();    
+    this.listenOrderEvents();
+  }
+
+  listenOrderEvents(): void {
+    const eventSource = new EventSource('http://localhost:8080/api/orders/events');    
+
+    eventSource.addEventListener(
+      'order-status',
+      (event: MessageEvent) => {
+
+        const updatedOrder: Order = JSON.parse(event.data);
+
+        this.ngZone.run(() => {
+
+          this.orders.update(orders =>
+            orders.map(order =>
+              order.id === updatedOrder.id
+                ? updatedOrder
+                : order
+            )
+          );
+
+        });
+      }
+    );
+
+    eventSource.onerror = error =>{
+      console.error(
+        'Error SSE. readyState:',
+        eventSource.readyState,
+        error
+      );
+    }
   }
 
   onOrderCreated(order: Order) {

@@ -5,9 +5,12 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import org.springframework.http.MediaType;
 
 import com.technicaltest.order.service.model.Order;
 import com.technicaltest.order.service.service.OrderService;
+import com.technicaltest.order.service.service.OrderSseService;
 
 import jakarta.validation.Valid;
 
@@ -23,9 +26,11 @@ import io.swagger.v3.oas.annotations.Operation;
 @CrossOrigin(origins = "http://localhost:4200")
 public class OrderController {
     private final OrderService orderService;
+    private final OrderSseService orderSseService;
 
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, OrderSseService orderSseService) {
         this.orderService = orderService;
+        this.orderSseService = orderSseService;
     }
 
     @Operation(
@@ -56,5 +61,12 @@ public class OrderController {
         return orderService.getAll();
     }
 
-   
+    @Operation(
+    summary = "Suscribirse a cambios de estado de pedidos",
+    description = "Abre una conexión SSE para recibir en tiempo real los cambios de estado de los pedidos"
+    )  
+    @GetMapping(value = "/events", produces=MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter events() {
+        return orderSseService.subscribe();
+    }
 }
