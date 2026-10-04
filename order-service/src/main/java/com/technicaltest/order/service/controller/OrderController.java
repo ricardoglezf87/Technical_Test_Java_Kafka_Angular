@@ -1,6 +1,7 @@
 package com.technicaltest.order.service.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,15 @@ public class OrderController {
     @ResponseStatus (HttpStatus.CREATED)
     public Order createOrder(@Valid  @RequestBody Order order) {
         return orderService.create(order);
+    }
+
+    @Operation(
+    summary = "Reintentar pedido",
+    description = "Reintenta el procesamiento de un pedido fallido"
+    )   
+    @PostMapping("/{id}/retry")
+    public Order retryOrder(@PathVariable UUID id) {
+        return orderService.retry(id);
     }
 
     @Operation(

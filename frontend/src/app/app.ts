@@ -17,19 +17,34 @@ export class App implements OnInit {
 
   constructor(private orderService: OrderService) {}
 
-  ngOnInit(): void {
-   
-    this.orderService.getOrders().subscribe({
-      next:(data) => {
-      console.log(data);
-      this.orders.set(data);
-    },
-    error:(error) => {
-      console.error('Error fetching orders:', error);
-    }});
+  ngOnInit(): void {   
+    this.loadOrders();    
   }
 
   onOrderCreated(order: Order) {
-    this.orders.update(orders => [...orders, order]);
+    this.loadOrders();
   }
+
+  onRetry(orderId: string) {
+    this.orderService.retryOrder(orderId).subscribe({
+      next: () => {
+        this.loadOrders();
+      },
+      error: (error) => {
+        console.error('Error retrying order:', error);
+      }
+    });
+  };
+
+  loadOrders(): void {
+    this.orderService.getOrders().subscribe({
+      next: (orders) => {
+        this.orders.set(orders);
+      },
+      error: (error) => {
+        console.error('Error cargando pedidos:', error);
+      }
+    });
+  }
+
 }

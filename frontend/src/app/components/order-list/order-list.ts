@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Order } from '../../models/order';
+import id from '@angular/common/locales/extra/id';
 
 @Component({
   imports: [CommonModule],
@@ -11,5 +12,13 @@ import { Order } from '../../models/order';
 export class OrderList {
   
   orders = input<Order[]>([]);
+
+  retry = output<string>();
+
+  retryOrder(orderId: string): void {
+    if(id){
+      this.retry.emit(orderId);
+    }
+  }
 
 }

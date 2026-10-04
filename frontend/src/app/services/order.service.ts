@@ -18,4 +18,8 @@ export class OrderService {
     createOrder(order: Order): Observable<Order> {
         return this.http.post<Order>(this.apiUrl, order);
     }
+
+    retryOrder(orderId: string): Observable<Order> {        
+        return this.http.post<Order>(`${this.apiUrl}/${orderId}/retry`, {});
+    }
 }

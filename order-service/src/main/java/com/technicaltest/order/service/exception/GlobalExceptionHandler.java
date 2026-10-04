@@ -25,7 +25,16 @@ public class GlobalExceptionHandler {
         response.put("errors", errors);
 
         return ResponseEntity.badRequest().body(response);
-    }    
+    }   
+    
+    @ExceptionHandler (IllegalStateException.class)
+    public ResponseEntity<Map<String,Object>> handleIllegalStateException(IllegalStateException ex) {
+        Map<String,Object> response = new HashMap<>();
+        response.put("status", HttpStatus.BAD_REQUEST.value());
+        response.put("error", ex.getMessage());
+
+        return ResponseEntity.badRequest().body(response);
+    }
 
     @ExceptionHandler (OrderNotFoundException.class)
     public ResponseEntity<Map<String,Object>> handleOrderNotFoundException(OrderNotFoundException ex) {

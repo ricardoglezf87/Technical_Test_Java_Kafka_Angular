@@ -31,6 +31,21 @@ public class OrderService {
         return orderDataClient.updateStatus(orderId.toString(), status);
     }
 
+    public Order retry(UUID orderId) {
+        Order order = orderDataClient.getById(orderId.toString());    
+        
+        if (!"FAILED".equals(order.getStatus())) {
+            throw new IllegalStateException(
+                "Solo se pueden reintentar pedidos en estado FAILED"
+            );
+        }
+
+        order.setStatus("CREATED");
+        Order updatedOrder = orderDataClient.updateStatus(orderId.toString(), "CREATED");
+        orderProducer.sendOrder(updatedOrder);
+        return updatedOrder;                
+    }
+
     public List<Order> getAll() {
         return orderDataClient.getAll();
     }
