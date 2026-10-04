@@ -8,18 +8,19 @@ import com.technicaltest.order.service.service.OrderService;
 import com.technicaltest.order.service.service.OrderSseService;
 
 @Service 
-public class OrderProcessedConsumer {
+public class OrderProcessedDltConsumer {
+
     private final OrderService orderService;
     private final OrderSseService orderSseService;
 
-    public OrderProcessedConsumer(OrderService orderService, OrderSseService orderSseService) {
+    public OrderProcessedDltConsumer(OrderService orderService, OrderSseService orderSseService) {
         this.orderService = orderService;
         this.orderSseService = orderSseService;
     }
-
-    @KafkaListener (topics = "order-processed", groupId = "order-service-group")
-    public void consumeProcessedOrder(Order processedOrder) {        
-        Order order = orderService.updateStatus(processedOrder.getId(), processedOrder.getStatus());
+    
+    @KafkaListener (topics = "order-processed-dlt", groupId = "order-service-group")
+    public void consume(Order processedOrder) {        
+        Order order = orderService.updateStatus(processedOrder.getId(), "FAILED");
         orderSseService.send(order);
     }
 }

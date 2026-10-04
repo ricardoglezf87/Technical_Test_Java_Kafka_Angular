@@ -15,7 +15,8 @@
 
     <section class="card">
       <app-order-list
-        [orders]="orders()">
+        [orders]="orders()" 
+        (retry)="onRetry($event)">
       </app-order-list>
     </section>
   </main>

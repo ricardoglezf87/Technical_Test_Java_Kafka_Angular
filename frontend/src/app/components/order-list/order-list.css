@@ -45,11 +45,23 @@ th {
 }
 
 .status.created {
-  background: #fff7ed;
-  color: #c2410c;
+  background-color: #fff3cd;
+  color: #856404;
 }
 
 .status.completed {
-  background: #ecfdf5;
-  color: #047857;
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.failed {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.retry-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }

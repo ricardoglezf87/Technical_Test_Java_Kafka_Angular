@@ -15,6 +15,7 @@
           <th>Cantidad</th>
           <th>Precio</th>
           <th>Estado</th>
+          <th>Acciones</th>
         </tr>
       </thead>
 
@@ -29,9 +30,18 @@
               <span
                 class="status"
                 [class.created]="order.status === 'CREATED'"
-                [class.completed]="order.status === 'COMPLETED'">
+                [class.completed]="order.status === 'COMPLETED'"
+                [class.failed]="order.status === 'FAILED'">
                 {{ order.status }}
               </span>
+            </td>
+            <td>
+              @if (order.status === 'FAILED' && order.id) {
+                <button
+                  (click)="retryOrder(order.id)" class="retry-button">
+                  Reintentar
+                </button>
+              }
             </td>
           </tr>
         }
